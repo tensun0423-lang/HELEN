@@ -1,0 +1,175 @@
+/* 顏色設定：淺色與深色模式 */
+:root {
+  --bg: #f4f6f9;
+  --card: #ffffff;
+  --text: #1f2933;
+  --muted: #5f6b7a;
+  --border: #d5dbe3;
+  --accent: #2457c5;
+  --accent-text: #ffffff;
+  --ok-bg: #e6f4ea;
+  --ok-text: #1e6b34;
+  --err-bg: #fdecea;
+  --err-text: #a12622;
+  --low: #5f6b7a;
+  --mid: #b26a00;
+  --high: #c62828;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181f;
+    --card: #1e242d;
+    --text: #e6e9ee;
+    --muted: #a0aab8;
+    --border: #39424f;
+    --accent: #6d9bff;
+    --accent-text: #0b1220;
+    --ok-bg: #173523;
+    --ok-text: #8fdca6;
+    --err-bg: #3d1a1a;
+    --err-text: #ffaaa5;
+    --low: #a0aab8;
+    --mid: #f0b44c;
+    --high: #ff7b72;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-size: 16px; /* 16px 以上，iPhone 點輸入框時不會自動放大 */
+  line-height: 1.5;
+}
+
+.page-header, main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.page-header { padding-top: 24px; }
+.page-header h1 { margin: 0 0 4px; font-size: 1.6rem; }
+.page-header p { margin: 0 0 16px; color: var(--muted); }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.card h2 { margin: 0 0 12px; font-size: 1.2rem; }
+
+/* 表單 */
+.field { margin: 0 0 16px; padding: 0; border: 0; min-width: 0; }
+
+.field > label, .field > legend {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  padding: 0;
+}
+
+.req { font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+
+input[type="text"], select, textarea {
+  width: 100%;
+  min-height: 44px; /* 手指好點的高度 */
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+textarea { resize: vertical; }
+
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.field [aria-invalid="true"] { border-color: var(--err-text); }
+
+.hint { font-size: 0.85rem; color: var(--muted); text-align: right; margin-top: 4px; }
+
+/* 緊急程度：三個大按鈕 */
+.segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.segmented label { position: relative; }
+.segmented input { position: absolute; opacity: 0; inset: 0; }
+.segmented span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.segmented input:checked + span {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.segmented input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+button {
+  width: 100%;
+  min-height: 48px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+button:disabled { opacity: 0.6; cursor: wait; }
+
+button.secondary {
+  width: auto;
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--accent);
+  background: transparent;
+  border: 1px solid var(--border);
+}
+
+/* 訊息 */
+.message { margin-top: 12px; padding: 10px 12px; border-radius: 8px; }
+.message.ok { background: var(--ok-bg); color: var(--ok-text); }
+.message.error { background: var(--err-bg); color: var(--err-text); }
+.message.info { color: var(--muted); padding-left: 0; }
+
+/* 清單 */
+.list-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+.list-header h2 { margin: 0; }
+
+.request-list { list-style: none; margin: 0; padding: 0; }
+
+.request-item { padding: 12px 0; border-top: 1px solid var(--border); }
+.request-item:first-child { border-top: 0; }
+
+.request-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 4px; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  padding: 1px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.tag.urgency-低 { color: var(--low); }
+.tag.urgency-中 { color: var(--mid); border-color: var(--mid); }
+.tag.urgency-高 { color: var(--high); border-color: var(--high); font-weight: 600; }
+
+.request-desc { margin: 0 0 4px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.request-meta { font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
