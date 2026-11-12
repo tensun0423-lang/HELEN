@@ -8,6 +8,8 @@
   const TEXT_COLOR = "#2b2118";
   const SPIN_MS = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 600 : 4500;
   const TAU = Math.PI * 2;
+  // Google 地圖搜尋時附加的地區關鍵字，避免搜到其他縣市的同名分店
+  const MAP_KEYWORD = { "交流道・工業區": "西屯 工業區", "福科路": "西屯 福科路", "榮總周邊": "西屯 榮總", "東海商圈": "東海" };
 
   const canvas = document.getElementById("wheel");
   const ctx = canvas.getContext("2d");
@@ -147,10 +149,12 @@
   function showResult(item) {
     lastPick = item;
     document.getElementById("result-name").textContent = item.name;
+    document.getElementById("result-area").textContent = item.area;
     document.getElementById("result-type").textContent = item.type;
     document.getElementById("result-note").textContent = item.note;
     document.getElementById("result-map").href =
-      "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(item.name + " 台中 西屯");
+      "https://www.google.com/maps/search/?api=1&query=" +
+      encodeURIComponent(item.name + " 台中 " + (MAP_KEYWORD[item.area] || ""));
     document.getElementById("result-source").href = item.source;
     resultEl.hidden = false;
   }
@@ -183,7 +187,7 @@
       name.textContent = item.name;
       const tag = document.createElement("span");
       tag.className = "tag";
-      tag.textContent = item.type;
+      tag.textContent = item.area + "・" + item.type;
       li.append(name, tag);
       listEl.append(li);
     });
