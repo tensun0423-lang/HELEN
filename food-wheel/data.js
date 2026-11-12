@@ -7,6 +7,9 @@
   const BIB = "https://www.taichung.gov.tw/8868/8872/9962/3321765";
   const BIB_DISHES = "https://sunnylife.tw/2025bib-gourmand/";
 
+  // 名單更新日期：修改名單時一起更新，頁面最下方會顯示
+  window.FOOD_UPDATED = "2026-11-12";
+
   window.FOOD_LIST = [
     // ---- 米其林必比登推介 ----
     { name: "阿坤麵", area: "中區", type: "麵食", tag: "必比登", note: "巷弄老麵店，乾麵配水晶餃湯，麻醬麵、滷蛋也有人推。", source: BIB_DISHES },

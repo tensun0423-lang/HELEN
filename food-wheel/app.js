@@ -225,11 +225,33 @@
   // ---- PWA ----
   // 註冊 Service Worker，讓網頁可以離線使用、安裝到主畫面
   if ("serviceWorker" in navigator) {
+    const updateBar = document.getElementById("update-bar");
+    // 第一次安裝時不提示；之後換成新版 Service Worker，才提示重新整理
+    const hadController = !!navigator.serviceWorker.controller;
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (hadController) updateBar.hidden = false;
+    });
+    document.getElementById("update-btn").addEventListener("click", () => {
+      window.location.reload();
+    });
+
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("sw.js").catch(() => {
+      navigator.serviceWorker.register("sw.js").then((registration) => {
+        // 裝在主畫面的 App 常常一直開在背景；切回來時檢查有沒有新版本
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "visible") registration.update().catch(() => {});
+        });
+      }).catch(() => {
         // 註冊失敗不影響轉盤本身的功能
       });
     });
+  }
+
+  // 顯示名單更新日期，方便確認手機上的 App 是不是最新版
+  const updatedEl = document.getElementById("updated");
+  if (window.FOOD_UPDATED) {
+    updatedEl.textContent = "名單更新：" + window.FOOD_UPDATED + "・共 " + ALL.length + " 家";
   }
 
   // 安裝按鈕：Android／電腦版 Chrome 會觸發 beforeinstallprompt；iPhone 改顯示操作說明

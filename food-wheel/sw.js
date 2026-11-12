@@ -1,7 +1,7 @@
 // 台中美食轉盤 Service Worker
 // 策略：先用網路取得最新版本並更新快取；離線或網路失敗時改用快取。
 // 修改任何要離線使用的檔案後，請把 CACHE_VERSION 加 1，讓舊快取被清掉。
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const CACHE_NAME = "food-wheel-v" + CACHE_VERSION;
 const APP_SHELL = [
   "./",
@@ -19,7 +19,8 @@ const APP_SHELL = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(APP_SHELL))
+      // 同樣略過瀏覽器快取，確保存進去的是新版檔案
+      .then((cache) => cache.addAll(APP_SHELL.map((url) => new Request(url, { cache: "no-cache" }))))
       .then(() => self.skipWaiting())
   );
 });
@@ -42,7 +43,9 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
 
   event.respondWith(
-    fetch(request)
+    // cache: "no-cache"：每次都先向伺服器確認有沒有新版。
+    // GitHub Pages 會讓瀏覽器把檔案快取 10 分鐘，不加這個可能拿到舊檔案。
+    fetch(request, { cache: "no-cache" })
       .then((response) => {
         if (response.ok) {
           const copy = response.clone();

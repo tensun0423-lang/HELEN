@@ -18,6 +18,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="update-bar" id="update-bar" role="status" hidden>
+    <span>已下載新版本</span>
+    <button id="update-btn" type="button">重新整理</button>
+  </div>
+
   <header class="page-header">
     <h1>台中美食轉盤</h1>
     <p>米其林必比登 ＋ 在地人私房名店，全台中真的好吃的店。<br>不知道吃什麼？轉一下，交給轉盤決定。</p>
@@ -61,6 +66,7 @@
       </div>
       <ul id="food-list" class="food-list"></ul>
       <p class="disclaimer">名單整理自網路食記與美食網站，部分文章發表已超過一年；營業時間、價格和是否仍在營業都可能變動，出發前請先用 Google 地圖確認。</p>
+      <p class="disclaimer" id="updated"></p>
     </section>
   </main>
 
