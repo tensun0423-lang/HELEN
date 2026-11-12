@@ -1,7 +1,7 @@
-// 東海美食轉盤 Service Worker
+// 台中美食轉盤 Service Worker
 // 策略：先用網路取得最新版本並更新快取；離線或網路失敗時改用快取。
 // 修改任何要離線使用的檔案後，請把 CACHE_VERSION 加 1，讓舊快取被清掉。
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 const CACHE_NAME = "food-wheel-v" + CACHE_VERSION;
 const APP_SHELL = [
   "./",
