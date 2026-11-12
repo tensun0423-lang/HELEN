@@ -105,6 +105,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outlin
 .result-label { margin: 0; color: var(--muted); }
 .result h2 { margin: 4px 0; font-size: 1.5rem; }
 .result-tags { margin: 0 0 8px; }
+.result-tag { border-color: var(--accent); color: var(--accent); font-weight: 600; }
 .result-type { display: inline-block; margin: 0 2px; padding: 0 10px; border: 1px solid var(--border); border-radius: 999px; font-size: 0.85rem; }
 .result-actions { display: grid; gap: 8px; margin-top: 12px; }
 .result-source { margin: 12px 0 0; font-size: 0.8rem; color: var(--muted); }

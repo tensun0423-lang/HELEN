@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#d9480f">
-  <meta name="description" content="國道一號台中交流道到東海商圈的美食轉盤，轉一下決定午餐晚餐吃什麼。">
+  <meta name="description" content="台中必比登與在地人私房美食轉盤，轉一下決定吃什麼。">
   <!-- PWA：安裝到主畫面 -->
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
@@ -14,13 +14,13 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="美食轉盤">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>東海美食轉盤</title>
+  <title>台中美食轉盤</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="page-header">
-    <h1>東海美食轉盤</h1>
-    <p>範圍：國道一號台中交流道 ～ 東海商圈。<br>午餐晚餐不知道吃什麼？轉一下，交給轉盤決定。</p>
+    <h1>台中美食轉盤</h1>
+    <p>米其林必比登 ＋ 在地人私房名店，全台中真的好吃的店。<br>不知道吃什麼？轉一下，交給轉盤決定。</p>
     <div class="install" id="install" hidden>
       <button id="install-btn" type="button" class="secondary">安裝到主畫面</button>
       <p id="install-hint" class="install-hint" hidden>iPhone：按 Safari 下方的「分享」，再選「加入主畫面」。</p>
@@ -44,7 +44,7 @@
       <div id="result" class="result" aria-live="polite" hidden>
         <p class="result-label">今天就吃</p>
         <h2 id="result-name"></h2>
-        <p class="result-tags"><span class="result-type" id="result-area"></span> <span class="result-type" id="result-type"></span></p>
+        <p class="result-tags"><span class="result-type result-tag" id="result-tag"></span> <span class="result-type" id="result-area"></span> <span class="result-type" id="result-type"></span></p>
         <p id="result-note"></p>
         <div class="result-actions">
           <a id="result-map" class="link-btn" target="_blank" rel="noopener">在 Google 地圖查看</a>
