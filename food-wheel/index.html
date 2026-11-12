@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>西屯美食轉盤</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>西屯美食轉盤</h1>
+    <p>午餐晚餐不知道吃什麼？轉一下，交給轉盤決定。</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="filters" role="group" aria-label="選擇類型">
+        <!-- 由 app.js 產生類型按鈕 -->
+      </div>
+
+      <div class="wheel-wrap">
+        <div class="pointer" aria-hidden="true"></div>
+        <canvas id="wheel" width="480" height="480" role="img" aria-label="美食轉盤"></canvas>
+      </div>
+
+      <button id="spin-btn" type="button">轉一下！</button>
+      <p class="count" id="count"></p>
+
+      <div id="result" class="result" aria-live="polite" hidden>
+        <p class="result-label">今天就吃</p>
+        <h2 id="result-name"></h2>
+        <p class="result-type" id="result-type"></p>
+        <p id="result-note"></p>
+        <div class="result-actions">
+          <a id="result-map" class="link-btn" target="_blank" rel="noopener">在 Google 地圖查看</a>
+          <button id="skip-btn" type="button" class="secondary">不想吃這家，排除再轉</button>
+        </div>
+        <p class="result-source">資料來源：<a id="result-source" target="_blank" rel="noopener">網路食記</a></p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="list-header">
+        <h2>名單</h2>
+        <button id="reset-btn" type="button" class="secondary">恢復排除的店</button>
+      </div>
+      <ul id="food-list" class="food-list"></ul>
+      <p class="disclaimer">名單整理自 2025～2026 年網路食記與美食網站，營業時間、價格和是否仍在營業都可能變動，出發前請先用 Google 地圖確認。</p>
+    </section>
+  </main>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

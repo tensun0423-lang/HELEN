@@ -9,3 +9,9 @@
 - 純 HTML/CSS/JavaScript，透過 CDN 載入 supabase-js v2，不需要安裝或建置。
 - 使用前要先在 Supabase 執行 `supabase/schema.sql` 建立資料表。
 - `config.js` 只能放 publishable key，不能放 secret key。
+
+## 西屯美食轉盤
+- 網址（GitHub Pages）：https://tensun0423-lang.github.io/HELEN/food-wheel/
+- 檔案在 `food-wheel/`：`index.html`、`style.css`、`app.js`、`data.js`（店家名單與資料來源）
+- 純 HTML/CSS/JavaScript，不需要安裝或建置，也不會連到 Supabase。
+- 要增減店家，修改 `food-wheel/data.js` 即可。
