@@ -15,3 +15,9 @@
 - 檔案在 `food-wheel/`：`index.html`、`style.css`、`app.js`、`data.js`（店家名單、區域與資料來源）
 - 純 HTML/CSS/JavaScript，不需要安裝或建置，也不會連到 Supabase。
 - 要增減店家，修改 `food-wheel/data.js` 即可。
+- PWA：可以安裝到手機主畫面，第一次開啟後也能離線使用。
+  - `manifest.webmanifest`：App 名稱、圖示、顏色
+  - `sw.js`：Service Worker，有網路時抓最新版本並更新快取，離線時改用快取
+  - `icons/`：App 圖示
+  - 安裝方式：Android 的 Chrome 按頁面上的「安裝到主畫面」；iPhone 的 Safari 按「分享」→「加入主畫面」
+  - 修改要離線使用的檔案後，把 `sw.js` 的 `CACHE_VERSION` 加 1，舊快取才會被清掉

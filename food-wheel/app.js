@@ -221,4 +221,47 @@
 
   refresh();
   setupCanvas();
+
+  // ---- PWA ----
+  // 註冊 Service Worker，讓網頁可以離線使用、安裝到主畫面
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {
+        // 註冊失敗不影響轉盤本身的功能
+      });
+    });
+  }
+
+  // 安裝按鈕：Android／電腦版 Chrome 會觸發 beforeinstallprompt；iPhone 改顯示操作說明
+  const installBox = document.getElementById("install");
+  const installBtn = document.getElementById("install-btn");
+  const installHint = document.getElementById("install-hint");
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  let deferredPrompt = null;
+
+  if (!isStandalone && isIOS) {
+    installBtn.hidden = true;
+    installHint.hidden = false;
+    installBox.hidden = false;
+  }
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    installBox.hidden = false;
+  });
+
+  installBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installBox.hidden = true;
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installBox.hidden = true;
+  });
 })();
