@@ -23,3 +23,14 @@
   - 修改要離線使用的檔案後，把 `sw.js` 的 `CACHE_VERSION` 加 1，舊快取才會被清掉
   - 已安裝的 App 切回前景時會自動檢查新版本，下載好後畫面上方會出現「已下載新版本・重新整理」
   - 修改名單時，一併更新 `data.js` 的 `FOOD_UPDATED`（頁面最下方會顯示名單更新日期）
+
+## 成長健康紀錄
+- 網址（GitHub Pages）：https://tensun0423-lang.github.io/HELEN/health/
+- 檔案在 `health/`：`index.html`、`style.css`、`app.js`、`manifest.webmanifest`、`sw.js`、`icons/`
+- 記錄孩子每學期的身高、體重、視力（裸視／戴鏡，左右眼）、散光（有／無與度數），自動算 BMI，並畫成曲線圖。
+- 曲線圖可以選項目和孩子；橫軸可依年級（方便兩個孩子比較）或依學年度。
+- **資料只存在使用者自己裝置的瀏覽器（localStorage），不會上傳，也不會存進這個儲存庫。**
+  - 「設定與備份」可以匯出備份檔（.json）、從備份檔還原，或匯出 Excel 用的 .csv。
+  - 換手機、清除瀏覽器資料或刪除 App 前要先匯出備份。
+  - iPhone 建議「加入主畫面」，沒安裝的網站太久沒開，資料可能被系統清掉。
+- PWA：可以安裝到主畫面、離線使用；修改程式後把 `sw.js` 的 `CACHE_VERSION` 加 1。

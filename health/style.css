@@ -1,0 +1,236 @@
+/* 顏色：淺色與深色模式。系列色來自已驗證的色盤（孩子 1 藍、孩子 2 橘…） */
+:root {
+  --bg: #f3f5f8;
+  --surface: #fcfcfb;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --muted: #6b6a66;
+  --border: #dcdfe4;
+  --grid: #e8e8e4;
+  --accent: #2a78d6;
+  --accent-text: #ffffff;
+  --danger: #c62828;
+  --ok-bg: #e6f4ea;
+  --ok-text: #1e6b34;
+  --err-bg: #fdecea;
+  --err-text: #a12622;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #6250d6;
+  --series-8: #e34948;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111110;
+    --surface: #1a1a19;
+    --text: #f0efec;
+    --text-2: #c3c2b7;
+    --muted: #a3a29b;
+    --border: #3a3a37;
+    --grid: #2c2c2a;
+    --accent: #3987e5;
+    --accent-text: #0b1220;
+    --danger: #ff7b72;
+    --ok-bg: #173523;
+    --ok-text: #8fdca6;
+    --err-bg: #3d1a1a;
+    --err-text: #ffaaa5;
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #0ca30c;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+  }
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.page-header, .tabs, main { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+.page-header { padding-top: calc(20px + env(safe-area-inset-top)); }
+.page-header h1 { margin: 0; font-size: 1.6rem; }
+.page-header p { margin: 4px 0 12px; color: var(--text-2); }
+
+/* 分頁 */
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 16px; }
+.tabs button {
+  min-height: 44px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.tabs button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-text); font-weight: 600; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.card h2 { margin: 0 0 12px; font-size: 1.15rem; }
+
+/* 孩子切換 */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.chip[aria-pressed="true"] { border-color: var(--text); font-weight: 600; box-shadow: inset 0 0 0 1px var(--text); }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+
+/* 表單 */
+fieldset { border: 0; margin: 8px 0 0; padding: 0; min-width: 0; }
+legend { font-weight: 700; padding: 0; margin-bottom: 4px; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+.span-2 { grid-column: span 2; }
+.field { margin-bottom: 12px; min-width: 0; }
+.field label { display: block; font-size: 0.9rem; color: var(--text-2); margin-bottom: 4px; }
+input, select, textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+input[type="file"] { padding: 8px; }
+textarea { resize: vertical; }
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+[aria-invalid="true"] { border-color: var(--err-text); }
+
+.hint { margin: 0 0 8px; font-size: 0.85rem; color: var(--muted); }
+.hint.strong { color: var(--text-2); }
+
+button { font: inherit; cursor: pointer; }
+button.primary, button.secondary, button.danger {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+button.primary { color: var(--accent-text); background: var(--accent); border: 0; }
+button.secondary { color: var(--accent); background: transparent; border: 1px solid var(--accent); }
+button.danger { color: var(--danger); background: transparent; border: 1px solid var(--danger); }
+button.small { min-height: 36px; padding: 0 12px; font-size: 0.9rem; }
+
+#add-btn { width: 100%; margin-bottom: 16px; }
+.form-actions, .button-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.form-actions button { flex: 1; }
+.button-row { margin-bottom: 12px; }
+
+.message { margin: 8px 0; padding: 10px 12px; border-radius: 8px; }
+.message.ok { background: var(--ok-bg); color: var(--ok-text); }
+.message.error { background: var(--err-bg); color: var(--err-text); }
+
+/* 紀錄清單 */
+.record-list { display: grid; gap: 12px; }
+.record {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--series-color, var(--accent));
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.record-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.record-head h3 { margin: 0; font-size: 1.05rem; }
+.record-head .sub { color: var(--muted); font-size: 0.85rem; }
+.record dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; margin: 10px 0; }
+.record dl div { min-width: 0; }
+.record dt { font-size: 0.8rem; color: var(--muted); }
+.record dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.record dd .delta { font-weight: 400; font-size: 0.8rem; color: var(--text-2); margin-left: 4px; }
+.record .note { margin: 0 0 8px; color: var(--text-2); font-size: 0.9rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.record-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.empty { color: var(--muted); text-align: center; padding: 24px 8px; }
+
+/* 圖表 */
+.chart-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+.chart-controls .field:last-child { grid-column: span 2; }
+.chart-title { margin: 4px 0 4px; font-size: 1.05rem; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 4px; font-size: 0.85rem; color: var(--text-2); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend svg { flex: none; }
+.chart-wrap { position: relative; touch-action: pan-y; }
+#chart { display: block; width: 100%; height: 280px; overflow: visible; }
+#chart .grid line { stroke: var(--grid); stroke-width: 1; }
+#chart .axis text { fill: var(--muted); font-size: 11px; }
+#chart .end-label { font-size: 11px; fill: var(--text-2); }
+#chart .crosshair { stroke: var(--muted); stroke-width: 1; }
+.chart-tip {
+  position: absolute;
+  top: 4px;
+  min-width: 120px;
+  max-width: 220px;
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+.chart-tip strong { display: block; margin-bottom: 4px; }
+.chart-tip div { display: flex; align-items: center; gap: 6px; color: var(--text-2); }
+.chart-tip b { color: var(--text); margin-left: auto; padding-left: 8px; }
+
+.table-view { margin-top: 8px; }
+.table-view summary { cursor: pointer; color: var(--accent); min-height: 32px; }
+.table-scroll { overflow-x: auto; }
+.table-view table { border-collapse: collapse; width: 100%; font-size: 0.9rem; margin-top: 8px; }
+.table-view th, .table-view td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: right; white-space: nowrap; }
+.table-view th:first-child, .table-view td:first-child { text-align: left; }
+
+/* 設定 */
+.children-list { display: grid; gap: 8px; margin-bottom: 12px; }
+.child-row { display: flex; align-items: center; gap: 8px; }
+.child-row input { flex: 1; }
+.danger-zone h2 { color: var(--danger); }
+
+/* 新版本提示列 */
+.update-bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  padding-top: calc(8px + env(safe-area-inset-top));
+  background: var(--text);
+  color: var(--bg);
+}
+.update-bar button { min-height: 36px; padding: 0 14px; color: var(--accent-text); background: var(--accent); border: 0; border-radius: 8px; font-weight: 600; }
